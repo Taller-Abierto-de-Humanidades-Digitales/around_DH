@@ -1,0 +1,115 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Around DH :: MOOC version</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"
+        integrity="sha512-OFs3W4DIZ5ZkrDhBFtsCP6JXtMEDGmhl0QPlmWYBJay40TT1n3gt2Xuw8Pf/iezgW9CdabjkNChRqozl/YADmg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="module" src="../../assets/js/footer_template.js"></script>
+    <style>
+        #map {
+            overflow: hidden;
+            padding-bottom: 50%;
+            position: relative;
+            height: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="d-flex justify-content-center">
+                <h1>Proyectos de Humanidades Digitales alrededor del mundo</h1>
+            </div>
+        </div>
+        <div id="map" class="row"></div>
+        <div class="row">
+            <div class="d-flex justify-content-end">
+                <a href="https://github.com/Taller-Abierto-de-Humanidades-Digitales/around_DH" class="btn btn-light"
+                    target="_blank">Ver en Github <i class="fa-brands fa-github"></i></a>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Este mapa está inspirado en <a href="https://arounddh.org/" target="_blank">Around DH 2020</a>,
+                        que a su vez retomó el proyecto <a href="http://arounddh.elotroalex.com/" target="_blank">
+                            Around DH in 80 Days</a>.</p>
+                </div>
+
+            </div>
+            <script>
+                window.onload = function () {
+                    var basemap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    });
+
+                    $.getJSON("data/proyectos.geojson", function (data) {
+                        var markers = L.markerClusterGroup();
+
+                        var geojson = L.geoJson(data, {
+                            onEachFeature: function (feature, layer) {
+                                if (feature.properties.nombre == "") {
+                                    layer.bindPopup(
+                                        "<a href=" + feature.properties.url + " target=\"_blank\" class=\"link-primary\">" + feature.properties.url + "</a>" +
+                                        "<p><b>Ubicación:</b> " + feature.properties.origen + "<br \\>" +
+                                        "<b>Equipo:</b> " + feature.properties.equipo + "<br \\>" +
+                                        "<b>Tema:</b> " + feature.properties.tema + "<br \\>" +
+                                        "<b>Tipo de proyecto:</b> " + feature.properties.tipo_proyecto + "</p>"
+                                    );
+                                } else {
+                                    layer.bindPopup(
+                                        "<h3>" + "<a href=" + feature.properties.url + " target=\"_blank\" class=\"link-primary\">" + feature.properties.nombre + "</a></h3>" +
+                                        "<p><b>Ubicación:</b> " + feature.properties.origen + "<br \\>" +
+                                        "<b>Equipo:</b> " + feature.properties.equipo + "<br \\>" +
+                                        "<b>Tema:</b> " + feature.properties.tema + "<br \\>" +
+                                        "<b>Tipo de proyecto:</b> " + feature.properties.tipo_proyecto + "</p>")
+                                }
+                            }
+                        });
+
+                        var map = L.map('map', {
+                            center: [40.4167, -3.7033],
+                            zoom: 12,
+                            layers: [basemap, geojson]
+                        }).fitBounds(geojson.getBounds());
+
+                        geojson.eachLayer(function (layer) {
+                            markers.addLayer(layer);
+                        });
+
+                        map.addLayer(markers);
+
+                        var baseMaps = {
+                            "OpenStreetMap": basemap
+                        };
+
+                        var overlayMaps = {
+                            "Proyectos": geojson
+                        };
+
+                        L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+                    });
+                };
+            </script>
+
+</body>
+
+</html>
