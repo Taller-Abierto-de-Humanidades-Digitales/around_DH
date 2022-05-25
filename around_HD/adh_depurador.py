@@ -8,7 +8,7 @@ import pandas as pd
 import requests
 from requests.exceptions import ConnectionError, MissingSchema
 
-around = pd.read_csv("data/AroundDH.csv")
+around = pd.read_csv("around_HD/AroundDH.csv")
 
 # remove rows if Project is nan
 around = around[pd.notnull(around['Link'])]
@@ -69,12 +69,12 @@ around = around[['Project', 'Team', 'Link',
 # rename columns
 around.columns = ['nombre', 'equipo', 'url', 'origen', 'tema', 'tipo_proyecto']
 
-proyectos = pd.read_csv("data/proyectos.csv")
+proyectos = pd.read_csv("data/propuesta_proyectos.csv")
 
 # merge around and proyectos
 around.merge(proyectos, on=['nombre', 'url', 'origen', 'tipo_proyecto'])
 
-around.to_csv("data/around_geo.csv", index=False)
+around.to_csv("around_HD/around_geo.csv", index=False)
 
 # save bad links as txt
 with open("data/broken_links.txt", "w") as f:
