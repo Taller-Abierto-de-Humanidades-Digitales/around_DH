@@ -8,7 +8,7 @@ window.onload = function () {
         map.setView([lat, lng], 3);
     }
 
-    $.getJSON("data/proyectos.geojson", function (data) {
+    $.getJSON("https://raw.githubusercontent.com/Taller-Abierto-de-Humanidades-Digitales/around_DH/main/data/proyectos.geojson", function (data) {
         var markers = L.markerClusterGroup();
 
         var geojson = L.geoJson(data, {
