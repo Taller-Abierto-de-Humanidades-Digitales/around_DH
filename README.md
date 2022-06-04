@@ -23,5 +23,5 @@ Un archivo de los enlaces que no pudieron ser validados se encuentra en el archi
 
 ## Licencia
 
-Este proyecto está licenciado bajo la [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+Este proyecto está licenciado bajo la [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 El código se pone a disposición del público bajo la licencia [MIT](https://opensource.org/licenses/MIT).
