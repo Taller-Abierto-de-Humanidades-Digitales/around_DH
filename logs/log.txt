@@ -3,3 +3,5 @@
 25/05/2022 17:07:14: Proyectos actualizados: 152
 25/05/2022 17:10:49: Proyectos a actualizar (1): ['HISMEDI: Historia, Memoria y Sociedad Digital']
 25/05/2022 17:10:49: Proyectos actualizados: 155
+13/09/2022 09:33:16: Proyectos a actualizar (2): ['Trove', 'Proyecto TRACES']
+13/09/2022 09:33:17: Proyectos actualizados: 156
