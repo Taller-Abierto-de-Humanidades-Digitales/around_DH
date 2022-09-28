@@ -5,3 +5,5 @@
 25/05/2022 17:10:49: Proyectos actualizados: 155
 13/09/2022 09:33:16: Proyectos a actualizar (2): ['Trove', 'Proyecto TRACES']
 13/09/2022 09:33:17: Proyectos actualizados: 156
+28/09/2022 11:39:22: Proyectos a actualizar (1): ['displaCy Named Entity Visualizer']
+28/09/2022 11:39:22: Proyectos actualizados: 157

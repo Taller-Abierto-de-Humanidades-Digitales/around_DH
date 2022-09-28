@@ -13,6 +13,19 @@ Este proyecto está inspirado en  [Around DH 2020](https://arounddh.org/), que a
 
 Un log con los proyectos añadidos se puede consultar en `logs/log.txt`.
 
+## Crear un nuevo proyecto desde el repositorio
+
+* Clone el repositorio
+* Desde el directorio del repositorio: `python3 propose_project.py`
+* Siga las instrucciones en pantalla
+
+Repita el proceso con todos los proyectos que desee añadir.
+
+Finalmente, para que los proyectos se reflejen en el mapa:
+
+* ejecutar `python3 geoconvert.py`.
+* hacer un commit y un push de los cambios: `git commit -am "Añadir nuevos proyectos"` y `git push origin master`
+
 ## Origen de los datos
 
 La fuente original de datos proviene de ["A1 AroundDH ( Digital Humanities ) | Global List"](https://docs.google.com/spreadsheets/d/1_PNv9Jlw_QlUh6SeYJrGYFucoRzlZAfLf7OouWu-qe4/edit?usp=sharing), creada por @elotroalex .
